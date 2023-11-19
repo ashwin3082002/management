@@ -1,8 +1,10 @@
-{% extends "layout.html" %}
+{% extends "dashboard/layout.html" %}
 
-{% block title %}View Teachers{% endblock title %}
+{% block dashboard_title %}View Teachers{% endblock dashboard_title %}
 
-{% block body %}
+{% block dashboard_body %}
+
+<div class="container" style="margin-top: 20px;">
 
 <table class="table">
     <thead>
@@ -14,6 +16,7 @@
         <th scope="col">Contact</th>
         <th scope="col">Email</th>
         <th scope="col">No. of Classes</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody class="table-group-divider">
@@ -28,6 +31,9 @@
         <td>{{teacher.phone_number}}</td>
         <td>{{teacher.email}}</td>
         <td>{{teacher.classes}}</td>
+        <td>
+          <a href="/dashboard/teacher/edit/{{teacher.id}}" class="btn btn-primary">Edit</a>
+          <a href="/dashboard/teacher/delete/{{teacher.id}}" class="btn btn-danger">Delete</a> 
       </tr>
       {% endfor %}
       {% else %}
@@ -35,5 +41,5 @@
       {% endif %}
     </tbody>
   </table>
-
-{% endblock body %}
+</div>
+{% endblock dashboard_body %}

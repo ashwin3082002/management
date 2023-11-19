@@ -1,0 +1,57 @@
+{% extends "dashboard/layout.html" %}
+
+{% block dashboard_head %}
+<script>
+    // JavaScript to trigger the modal on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      var myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+      myModal.show();
+    });
+  </script>
+{% endblock dashboard_head %}
+
+
+
+
+{% block dashboard_body %}
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Teacher</h1>
+        </div>
+        <div class="modal-body">
+          <form method="POST" action="{% url 'teacher_view' %}?id={{teacher.id}}">
+            {% csrf_token %}
+            <label for="id" class="form-label"><strong>Teacher ID</strong></label>
+            <input type="text" disabled class="form-control" id="id" value="{{teacher.id}}" >
+
+          <label for="name" class="form-label"><strong>Name</strong></label>
+            <input type="text" class="form-control" id="full_name" value="{{teacher.full_name}}" >
+
+            <label for="age" class="form-label"><strong>Age</strong></label>
+            <input type="text" class="form-control" id="age" value="{{teacher.age}}" >
+
+            <label for="date_of_birth" class="form-label"><strong>Date of Birth</strong></label>
+            <input type="date" class="form-control" id="date_of_birth" value="{{ teacher.date_of_birth|date:'Y-m-d' }}" >
+
+            <label for="Classes" class="form-label"><strong>Classes</strong></label>
+            <input type="text" class="form-control" id="classes" value="{{teacher.classes}}" >
+
+            <label for="email" class="form-label"><strong>Email</strong></label>
+            <input type="text" disabled class="form-control" id="email" value="{{teacher.email}}" >
+
+            <label for="phone_numeber" class="form-label"><strong>Phone Number</strong></label>
+            <input type="text" class="form-control" id="phone_numeber" value="{{teacher.phone_number}}" >
+        </div>
+        <div class="modal-footer">
+          <button type="button"  class="btn btn-danger"><a href="{% url "teacher_view" %}" style="text-decoration:none; color:white;">Close</a></button>
+          <button type="submit" class="btn btn-success">Apply Changes</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+{% endblock dashboard_body %}
+

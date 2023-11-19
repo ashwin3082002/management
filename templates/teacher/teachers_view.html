@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}View Teachers{% endblock title %}
+
+{% block body %}
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th> 
+        <th scope="col">Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Date of Birth</th>
+        <th scope="col">Contact</th>
+        <th scope="col">Email</th>
+        <th scope="col">No. of Classes</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+
+    {% if teachers %}
+        {% for teacher in teachers %}
+      <tr>
+        <td>{{teacher.id}}</td>
+        <td>{{teacher.full_name}}</td>
+        <td>{{teacher.age}}</td>
+        <td>{{teacher.date_of_birth}}</td>
+        <td>{{teacher.phone_number}}</td>
+        <td>{{teacher.email}}</td>
+        <td>{{teacher.classes}}</td>
+      </tr>
+      {% endfor %}
+      {% else %}
+      <td>No Teachers Added Yet</td>
+      {% endif %}
+    </tbody>
+  </table>
+
+{% endblock body %}

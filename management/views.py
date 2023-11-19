@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from management.models import *
+from database.models import *
 from utilities.functions import send_email
 
 def index(request):
@@ -65,3 +65,10 @@ Management Portal Team
         else:
             messages.error(request, f"Mail Not Sent, but teacher created with ID: {teacher_id} ")
     return render(request, 'index.html')
+
+def teacher_view(request):
+    teachers = Teacher.objects.all()
+    if not teachers:
+        messages.error(request,"No Teachers Added Yet!!")
+        return redirect("teacher_view")
+    return render(request, 'teacher/teachers_view.html', {"teachers":teachers})

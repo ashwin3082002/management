@@ -25,5 +25,6 @@ urlpatterns = [
 
     # Teacher Routes
     path("dashboard/teacher", views.teacher_dashboard, name="teacher_dashboard"),
-    path("dasboard/teacher/add", views.teacher_add, name="teacher_add"),
+    path("dashboard/teacher/add", views.teacher_add, name="teacher_add"),
+    path("dashboard/teacher/view", views.teacher_view, name="teacher_view"),
 ]

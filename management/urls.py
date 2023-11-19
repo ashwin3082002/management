@@ -23,6 +23,10 @@ urlpatterns = [
 
     path("", views.index, name="index"),
 
+    # Authentication
+    path("login", views.login_user, name="login"),
+    path("logout", views.logout_user, name="logout"),
+
     # Teacher Routes
     path("dashboard", views.dashboard, name="dashboard"),
     path("dashboard/teacher/add", views.teacher_add, name="teacher_add"),

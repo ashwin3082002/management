@@ -6,13 +6,41 @@ from database.models import *
 from utilities.functions import send_email
 
 def index(request):
-    messages.info(request, "Hello world!")
     return render(request, 'index.html')
 
+# Authentication Views
+def login_user(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard')
+    
+    if request.method == 'POST':
+        username = request.POST['email']
+        password = request.POST['password']
+        try:
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.success(request, "Logged in Successfully!")
+                return redirect('dashboard')
+            else:
+                messages.error(request, "Invalid Credentials!")
+                return redirect('login')
+        except:
+            messages.error(request, "Something Wrong with Database!! Please Try Again Later")
+            return redirect('login')
+    return render(request, 'index.html')
+
+def logout_user(request):
+    logout(request)
+    messages.success(request, "Logged out Successfully!")
+    return redirect('index')
+
 # Teacher Views
+@login_required(login_url='index')
 def dashboard(request):
     return render(request, 'dashboard/dashboard.html')
 
+@login_required(login_url='index')
 def teacher_add(request):
     if request.method == 'POST':
         full_name = request.POST['full_name']
@@ -68,6 +96,7 @@ Management Portal Team
         
     return render(request, 'teacher/teachers_add.html')
 
+@login_required(login_url='index')
 def teacher_view(request):
     teachers = Teacher.objects.all()
     if not teachers:
@@ -82,6 +111,7 @@ def teacher_view(request):
 
     return render(request, 'teacher/teachers_view.html', {"teachers":teachers, "total_no_of_classes":total_no_of_classes, "average_no_of_classes":average_no_of_classes})
 
+@login_required(login_url='index')
 def teacher_edit(request, id):
     if request.method == 'POST':
         full_name = request.POST['full_name']
@@ -134,6 +164,7 @@ Management Portal Team
     teacher = Teacher.objects.get(id=id)
     return render(request, 'teacher/teachers_edit.html',{'teacher':teacher})
 
+@login_required(login_url='index')
 def teacher_delete(request, id):
     teacher = Teacher.objects.get(id=id)
     email = teacher.email
@@ -160,6 +191,7 @@ Management Portal Team
         messages.error(request, "Teacher Deleted Successfully, but mail not sent!!")
         return redirect('teacher_view')
 
+@login_required(login_url='index')
 def teacher_filterview(request):
     teacher = Teacher.objects.all()
     

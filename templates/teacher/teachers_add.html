@@ -9,6 +9,7 @@
     <h2>Add Teacher</h2>
     <br>
     <form method="POST" action="{% url "teacher_add" %}">
+      {% csrf_token %}
         <div class="form-floating mb-3">
             <input required type="email" name="email" class="form-control" id="floatingInput" placeholder="name@domain.tld">
             <label for="floatingInput">Email address</label>
@@ -35,7 +36,7 @@
           </div>
 
           <div class="form-floating mb-3">
-            <input required type="tel" name="phone_number" pattern="[0-9]{10}" autofocus oninvalid="setCustomValidity('Please Enter a Valid Mobile Number!')" class="form-control" id="floatingInput" placeholder="9876543211">
+            <input required type="tel" name="phone_number" class="form-control" id="floatingInput" placeholder="9876543211">
             <label for="floatingInput">Phone Number</label>
           </div>
         <button type="submit" class="btn btn-primary">Create Teacher</button>

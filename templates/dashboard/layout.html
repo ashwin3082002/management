@@ -8,7 +8,7 @@
 
 <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Management Portal</a>
+      <a class="navbar-brand" href="{% url "dashboard" %}">Management Portal</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -22,10 +22,14 @@
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{% url "teacher_add" %}">Add Teacher</a></li>
               <li><a class="dropdown-item" href="{% url "teacher_view" %}">View Teacher</a></li>
+              <li><a class="dropdown-item" href="{% url "teacher_view" %}">Update Teacher</a></li>
+              <li><a class="dropdown-item" href="{% url "teacher_view" %}">Delete Teacher</a></li>
+              <li><a class="dropdown-item" href="{% url "teacher_view" %}">Search Teacher</a></li>
+              <li><a class="dropdown-item" href="{% url "teacher_filterview" %}">Filter Teacher</a></li>
             </ul>
           </li>
         </ul>
-          <button class="btn btn-outline-danger" type="submit">Logout</button>
+          <a href="{% url "logout" %}" style="text-decoration:none; color:white;"><button class="btn btn-outline-danger" type="submit">Logout</button></a>
       </div>
     </div>
   </nav>

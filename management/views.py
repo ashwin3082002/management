@@ -71,7 +71,13 @@ def teacher_view(request):
     if not teachers:
         messages.error(request,"No Teachers Added Yet!!")
         return redirect("teacher_view")
-    return render(request, 'teacher/teachers_view.html', {"teachers":teachers})
+    
+    total_no_of_classes = 0
+    for teacher in teachers:
+        total_no_of_classes += int(teacher.classes)
+    print(total_no_of_classes)
+
+    return render(request, 'teacher/teachers_view.html', {"teachers":teachers, "total_no_of_classes":total_no_of_classes})
 
 def teacher_edit(request, id):
     if request.method == 'POST':
@@ -126,4 +132,27 @@ Management Portal Team
     return render(request, 'teacher/teachers_edit.html',{'teacher':teacher})
 
 def teacher_delete(request, id):
-    print(id)
+    teacher = Teacher.objects.get(id=id)
+    email = teacher.email
+    name = teacher.full_name
+    teacher.delete()
+    flag = send_email(
+        "Teacher Deleted Successfully! | Management Portal",
+        f"""
+Hello {name},
+
+Your details have been deleted from the Management Portal by the admin.
+
+If you think this is a mistake, Please contact the Portal Admin.
+
+Regards,
+Management Portal Team
+""",
+        email)
+    
+    if flag:   
+        messages.success(request, "Teacher Deleted Successfully!")
+        return redirect('teacher_view')
+    else:
+        messages.error(request, "Teacher Deleted Successfully, but mail not sent!!")
+        return redirect('teacher_view')

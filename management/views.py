@@ -61,10 +61,12 @@ Management Portal Team
 
         if flag:
             messages.success(request, "Teacher added successfully!")
-            return redirect('teacher_add')
+            return redirect('teacher_view')
         else:
             messages.error(request, f"Mail Not Sent, but teacher created with ID: {teacher_id} ")
-    return render(request, 'index.html')
+            return redirect('teacher_view')
+        
+    return render(request, 'teacher/teachers_add.html')
 
 def teacher_view(request):
     teachers = Teacher.objects.all()

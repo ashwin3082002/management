@@ -20,7 +20,7 @@ from management import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    
+
     path("", views.index, name="index"),
 
     # Teacher Routes
@@ -29,4 +29,5 @@ urlpatterns = [
     path("dashboard/teacher/view", views.teacher_view, name="teacher_view"),
     path("dashboard/teacher/edit/<int:id>", views.teacher_edit, name="teacher_edit"),
     path("dashboard/teacher/delete/<int:id>", views.teacher_delete, name="teacher_delete"),
+    path('dashboard/teacher/filterview', views.teacher_filterview, name='teacher_filterview'),
 ]

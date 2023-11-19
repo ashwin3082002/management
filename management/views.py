@@ -159,3 +159,8 @@ Management Portal Team
     else:
         messages.error(request, "Teacher Deleted Successfully, but mail not sent!!")
         return redirect('teacher_view')
+
+def teacher_filterview(request):
+    teacher = Teacher.objects.all()
+    
+    return render(request, 'teacher/teachers_filter.html', {'teachers':teacher})

@@ -75,9 +75,10 @@ def teacher_view(request):
     total_no_of_classes = 0
     for teacher in teachers:
         total_no_of_classes += int(teacher.classes)
-    print(total_no_of_classes)
+    no_of_teachers = Teacher.objects.count()
+    average_no_of_classes = total_no_of_classes/no_of_teachers
 
-    return render(request, 'teacher/teachers_view.html', {"teachers":teachers, "total_no_of_classes":total_no_of_classes})
+    return render(request, 'teacher/teachers_view.html', {"teachers":teachers, "total_no_of_classes":total_no_of_classes, "average_no_of_classes":average_no_of_classes})
 
 def teacher_edit(request, id):
     if request.method == 'POST':

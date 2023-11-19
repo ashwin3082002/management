@@ -22,4 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path("", views.index, name="index"),
+
+    # Teacher Routes
+    path("dashboard/teacher", views.teacher_dashboard, name="teacher_dashboard"),
+    path("dasboard/teacher/add", views.teacher_add, name="teacher_add"),
 ]

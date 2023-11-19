@@ -80,7 +80,6 @@ def teacher_edit(request, id):
         date_of_birth = request.POST['date_of_birth']
         classes = request.POST['classes']
         phone_number = request.POST['phone_number']
-        email = request.POST['email']
 
         try:
             teacher = Teacher.objects.get(id=id)
@@ -102,14 +101,14 @@ Full Name: {full_name}
 Age: {age}
 Date of Birth: {date_of_birth}
 Contact No: {phone_number}
-Email: {email}
+Email: {teacher.email}
 
 If you find anything discripensies, Please contact the Portal Admin.
 
 Regards,
 Management Portal Team
 """,
-                email)
+                teacher.email)
             
             if flag:
                 messages.success(request, "Teacher Updated Successfully!")

@@ -23,7 +23,7 @@
     </script>
 
     {% for message in messages %}
-        <div id="django-message-div" style="width:50%; margin:0 auto; position:fixed; top:-10px; left:25%; visibility: hidden; opacity: 0; transition: top ease-in-out 0.4s;" {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible" {% endif %} role="alert">
+        <div id="django-message-div" style="width:50%; margin:0 auto; position:fixed; top:-10px; left:25%; visibility: hidden; opacity: 0; transition: top ease-in-out 0.4s; z-index: 1000;" {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible" {% endif %} role="alert">
             <div>{{message}}</div>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>

@@ -1,0 +1,81 @@
+{% extends "dashboard/layout.html" %}
+
+{% block dashboard_title %}Add Student{% endblock dashboard_title %}
+
+{% block dashboard_body %}
+<script>
+function CreateInput(){
+  var newField = document.createElement('input');
+  newField.setAttribute('type','text');
+  newField.setAttribute('name','text');
+  newField.setAttribute('class','form-control');
+  newField.setAttribute('id','floatingInput');
+  formfield.appendChild(newField);
+}
+</script>
+
+<div class="container" style="width:30%; margin-top:40px; margin-bottom:40px">
+    <h2>Add Student</h2>
+    <br>
+    <form method="POST" action="{% url "student_add" %}">
+      {% csrf_token %}
+        <div class="form-floating mb-3">
+            <input required type="email" name="email" class="form-control" id="floatingInput" placeholder="name@domain.tld">
+            <label for="floatingInput">Email address</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input required type="text" name="full_name" class="form-control" id="floatingInput" placeholder="Sample Name">
+            <label for="floatingInput">Full Name</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input required type="number" name="age" class="form-control" id="floatingInput" placeholder="20">
+            <label for="floatingInput">Age</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input required type="date" name="date_of_birth" class="form-control" id="floatingInput" placeholder="2002-08-2002">
+            <label for="floatingInput">Date of Birth</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input required type="number" name="class_academic" class="form-control" id="floatingInput" placeholder="10">
+            <label for="floatingInput">Academic Class</label>
+          </div>
+
+          <strong style="margin-bottom:10px;">Subject & Marks</strong>
+          
+          <div class="form-floating mb-3">
+          <div class="input-group">
+            <span class="input-group-text">English</span>
+            <input type="text" name="english" placeholder="Enter Mark" aria-label="Subject" class="form-control">
+          </div>
+        </div>
+
+        <div class="form-floating mb-3">
+          <div class="input-group">
+            <span class="input-group-text">Social Science</span>
+            <input type="number" name="sst" placeholder="Enter Marks" aria-label="Marks" class="form-control">
+          </div>
+        </div>
+
+        <div class="form-floating mb-3">
+          <div class="input-group">
+            <span class="input-group-text">Maths</span>
+            <input type="number" name="maths" placeholder="Enter Marks" aria-label="Marks" class="form-control">
+          </div>
+        </div>
+          
+
+          <div class="form-floating mb-3">
+            <input required type="tel" name="phone_number" class="form-control" id="floatingInput" placeholder="9876543211">
+            <label for="floatingInput">Phone Number</label>
+          </div>
+        <button type="submit" class="btn btn-primary">Create Teacher</button>
+      </form>
+
+</div>
+
+
+{% endblock dashboard_body %}

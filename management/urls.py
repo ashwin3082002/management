@@ -34,6 +34,13 @@ urlpatterns = [
     path("dashboard/teacher/edit/<int:id>", views.teacher_edit, name="teacher_edit"),
     path("dashboard/teacher/delete/<int:id>", views.teacher_delete, name="teacher_delete"),
     path('dashboard/teacher/filterview', views.teacher_filterview, name='teacher_filterview'),
+
+    # Student Routes
+    path("dashboard/student/add", views.student_add, name="student_add"),
+    path("dashboard/student/view", views.student_view, name="student_view"),
+    path("dashboard/student/edit/<int:id>", views.student_edit, name="student_edit"),
+    path("dashboard/student/delete/<int:id>", views.student_delete, name="student_delete"),
+    path('dashboard/student/classaverage', views.student_classaverage, name='student_classaverage'),
 ]
 
 handler400 = 'management.views.some_error'

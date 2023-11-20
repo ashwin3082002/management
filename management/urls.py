@@ -40,6 +40,7 @@ urlpatterns = [
     path("dashboard/student/view", views.student_view, name="student_view"),
     path("dashboard/student/edit/<int:id>", views.student_edit, name="student_edit"),
     path("dashboard/student/delete/<int:id>", views.student_delete, name="student_delete"),
+    path('dashboard/student/classaverage', views.student_classaverage, name='student_classaverage'),
 ]
 
 handler400 = 'management.views.some_error'

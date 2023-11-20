@@ -107,8 +107,13 @@ def teacher_view(request):
     total_no_of_classes = 0
     for teacher in teachers:
         total_no_of_classes += int(teacher.classes)
+        
     no_of_teachers = Teacher.objects.count()
-    average_no_of_classes = total_no_of_classes/no_of_teachers
+
+    if no_of_teachers == 0:
+        average_no_of_classes = 0
+    else:
+        average_no_of_classes = total_no_of_classes/no_of_teachers
 
     return render(request, 'teacher/teachers_view.html', {"teachers":teachers, "total_no_of_classes":total_no_of_classes, "average_no_of_classes":average_no_of_classes})
 
@@ -215,17 +220,11 @@ def student_add(request):
         email = request.POST['email']
         phone_number = request.POST['phone_number']
         
-        subject1 = request.POST['subject1']
-        subject2 = request.POST['subject2']
-        subject3 = request.POST['subject3']
-        subject4 = request.POST['subject4']
+        english = request.POST['english']
+        maths = request.POST['maths']
+        sst = request.POST['sst']
 
-        mark1 = request.POST['mark1']
-        mark2 = request.POST['mark2']
-        mark3 = request.POST['mark3']
-        mark4 = request.POST['mark4']
-
-        subjects_list = str({subject1:mark1, subject2:mark2, subject3:mark3, subject4:mark4})
+        subjects_list = str({"maths":maths, "english":english, "sst":sst})
 
 
         try:
@@ -305,3 +304,22 @@ def student_delete(request, id):
     student.delete()
     messages.success(request, "Student Deleted Successfully!")
     return redirect('student_view')
+
+@login_required(login_url='index')
+def student_classaverage(request):
+    students = Student.objects.all()
+    class_average = {}
+    if not students:
+        messages.error(request,"No Students Added Yet!!")
+        return redirect("student_view")
+    
+    total_marks = 0
+
+    for student in students:
+        subjects_list = eval(student.subjects_list)
+        for mark in subjects_list.values():
+            total_marks += int(mark)
+
+    average_marks = total_marks/(len(students)*3)
+
+    return render(request, 'student/student_classaverage.html', {"average_marks":average_marks})

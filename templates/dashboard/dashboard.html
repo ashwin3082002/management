@@ -10,6 +10,8 @@
             <p>Here you can manage your users, groups, and permissions.</p>
         </div>
         <h2>Teachers</h2>
+
+        <div>
         <div class="container-fluid">
             <a href="{% url "teacher_add" %}" style="text-decoration:none; color:white;"><button type="button"  class="btn btn-success">Add Teachers</button></a>
             
@@ -19,5 +21,17 @@
             <a href="{% url "teacher_filterview" %}" style="text-decoration:none; color:white;"><button type="button"  class="btn btn-success">Filter Teachers</button></a>
           
         </div>
+    </div>
+
+        
+        <div style="margin-top:50px;">
+        <h2>Students</h2>
+        <div class="container-fluid" >
+            <a href="{% url "student_add" %}" style="text-decoration:none; color:white;"><button type="button"  class="btn btn-success">Add Students</button></a>
+            
+            <a href="{% url "student_view" %}" style="text-decoration:none; color:white;"><button type="button"  class="btn btn-success">View Students</button></a>
+        </div>
+
+    </div>
     </div>
 {% endblock dashboard_body %}

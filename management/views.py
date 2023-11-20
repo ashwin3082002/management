@@ -298,4 +298,10 @@ def student_edit(request, id):
     student = Student.objects.get(id=id)
     subject_list = eval(student.subjects_list)
     return render(request, 'student/student_edit.html',{'student':student, 'subject_list':subject_list})
-    
+
+@login_required(login_url='index')
+def student_delete(request, id):
+    student = Student.objects.get(id=id)
+    student.delete()
+    messages.success(request, "Student Deleted Successfully!")
+    return redirect('student_view')

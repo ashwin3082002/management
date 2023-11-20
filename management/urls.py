@@ -39,7 +39,7 @@ urlpatterns = [
     path("dashboard/student/add", views.student_add, name="student_add"),
     path("dashboard/student/view", views.student_view, name="student_view"),
     path("dashboard/student/edit/<int:id>", views.student_edit, name="student_edit"),
-    # path("dashboard/student/delete/<int:id>", views.student_delete, name="student_delete"),
+    path("dashboard/student/delete/<int:id>", views.student_delete, name="student_delete"),
 ]
 
 handler400 = 'management.views.some_error'

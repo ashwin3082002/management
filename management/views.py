@@ -202,3 +202,57 @@ def teacher_filterview(request):
 
 def some_error(request,*args, **argv):
     return render(request,'404.html')
+
+
+# Student Views
+@login_required(login_url='index')
+def student_add(request):
+    if request.method == 'POST':
+        full_name = request.POST['full_name']
+        age = request.POST['age']
+        date_of_birth = request.POST['date_of_birth']
+        class_academic = request.POST['class_academic']
+        email = request.POST['email']
+        phone_number = request.POST['phone_number']
+        
+        subject1 = request.POST['subject1']
+        subject2 = request.POST['subject2']
+        subject3 = request.POST['subject3']
+        subject4 = request.POST['subject4']
+
+        mark1 = request.POST['mark1']
+        mark2 = request.POST['mark2']
+        mark3 = request.POST['mark3']
+        mark4 = request.POST['mark4']
+
+        subjects_list = str({subject1:mark1, subject2:mark2, subject3:mark3, subject4:mark4})
+
+
+        try:
+            student = Student.objects.create(
+                full_name=full_name,
+                age=age,
+                date_of_birth=date_of_birth,
+                class_acadenuc=class_academic,
+                email=email,
+                phone_number=phone_number,
+                subjects_list=subjects_list
+            )
+            student.save()
+            student_id = Student.objects.get(email=email).id
+        except:
+            messages.error(request, "Something Wrong with Database!! Please Try Again Later")
+            return redirect('student_add')
+        
+        messages.success(request, "Student added successfully!")
+        return redirect('student_view')
+
+    return render(request, 'student/student_add.html')
+
+@login_required(login_url='index')
+def student_view(request):
+    students = Student.objects.all()
+    if not students:
+        messages.error(request,"No Students Added Yet!!")
+        return redirect("student_view")
+    return render(request, 'student/student_view.html', {"students":students})

@@ -1,7 +1,7 @@
 
 # Management Portal
 
-## For Best Experiance Use Laptop
+## For Better Experiance Use Laptop
 
 ## Introduction
 The Management portal is a portal where we can manage teachers in a university. This portal also sends mail updates to teachers when any action (Addition/Updation/Deletion) is done on their data. I am planning to add the student Management also in this same software.

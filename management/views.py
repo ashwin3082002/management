@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from database.models import *
 from utilities.functions import send_email
+from django.template import RequestContext
 
 def index(request):
     return render(request, 'index.html')
@@ -196,3 +197,8 @@ def teacher_filterview(request):
     teacher = Teacher.objects.all()
     
     return render(request, 'teacher/teachers_filter.html', {'teachers':teacher})
+
+# Error Handling
+
+def some_error(request,*args, **argv):
+    return render(request,'404.html')

@@ -35,3 +35,8 @@ urlpatterns = [
     path("dashboard/teacher/delete/<int:id>", views.teacher_delete, name="teacher_delete"),
     path('dashboard/teacher/filterview', views.teacher_filterview, name='teacher_filterview'),
 ]
+
+handler400 = 'management.views.some_error'
+handler403 = 'management.views.some_error'
+handler404 = 'management.views.some_error'
+handler500 = 'management.views.some_error'

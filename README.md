@@ -43,7 +43,7 @@ The Student Module is still under development
 - App Engine (GCP): Google App Engine is a cloud computing platform as a service for developing and hosting web applications in Google-managed data centers. Applications are sandboxed and run across multiple servers.
 ## Testing
 
-Visit this URL to Test the Live Hosted Application: [google.com](https://google.com)
+Visit this URL to Test the Live Hosted Application: [Visit Site](https://rashw.in)
 
 Email: admin
 Password: admin

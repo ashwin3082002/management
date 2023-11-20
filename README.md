@@ -40,6 +40,7 @@ The Student Module is still under development
 - CockroachDB: A robust and reliable relational database management system for storing and retrieving data, distributed database with standard SQL for cloud applications.
 - HTML: The markup language used for structuring the webpages
 - Bootstrap 5: A powerful Library on CDN, feature-packed frontend toolkit.
+- App Engine (GCP): Google App Engine is a cloud computing platform as a service for developing and hosting web applications in Google-managed data centers. Applications are sandboxed and run across multiple servers.
 ## Testing
 
 Visit this URL to Test the Live Hosted Application: [google.com](https://google.com)

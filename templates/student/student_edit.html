@@ -1,0 +1,80 @@
+{% extends "dashboard/layout.html" %}
+
+{% block dashboard_head %}
+<script>
+    // JavaScript to trigger the modal on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      var myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+      myModal.show();
+    });
+  </script>
+{% endblock dashboard_head %}
+
+
+
+
+{% block dashboard_body %}
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit student</h1>
+        </div>
+        <div class="modal-body">
+          <form method="POST" action="{% url 'student_edit' id=student.id %}">
+            {% csrf_token %}
+            <label for="id" class="form-label"><strong>student ID</strong></label>
+            <input type="text" disabled class="form-control" id="id" value="{{student.id}}" >
+
+          <label for="name" class="form-label"><strong>Name</strong></label>
+            <input type="text" class="form-control" name="full_name" value="{{student.full_name}}" >
+
+            <label for="age" class="form-label"><strong>Age</strong></label>
+            <input type="text" class="form-control" name="age" value="{{student.age}}" >
+
+            <label for="date_of_birth" class="form-label"><strong>Date of Birth</strong></label>
+            <input type="date" class="form-control" name="date_of_birth" value="{{ student.date_of_birth|date:'Y-m-d' }}" >
+
+            <label for="Classes" class="form-label"><strong>Class</strong></label>
+            <input type="text" class="form-control" name="class_academic" value="{{student.class_academic}}" >
+            
+            <strong>Subject and Marks</strong>
+            <div style="margin-top:10px;" class="form-floating mb-3">
+              <div class="input-group">
+                <span class="input-group-text">English</span>
+                <input type="text" name="english" value="{{subject_list.english}}" aria-label="Subject" class="form-control">
+              </div>
+            </div>
+
+            <div style="margin-top:10px;" class="form-floating mb-3">
+              <div class="input-group">
+                <span class="input-group-text">Maths</span>
+                <input type="text" name="maths" value="{{subject_list.maths}}" aria-label="Subject" class="form-control">
+              </div>
+            </div>
+
+            <div style="margin-top:10px;" class="form-floating mb-3">
+              <div class="input-group">
+                <span class="input-group-text">Social Science</span>
+                <input type="text" name="sst" value="{{subject_list.sst}}" aria-label="Subject" class="form-control">
+              </div>
+            </div>
+
+
+            <label for="email" class="form-label"><strong>Email</strong></label>
+            <input type="text" disabled class="form-control" name="email" value="{{student.email}}" >
+
+            <label for="phone_numeber" class="form-label"><strong>Phone Number</strong></label>
+            <input type="text" class="form-control" name="phone_number" value="{{student.phone_number}}" >
+        </div>
+        <div class="modal-footer">
+          <button type="button"  class="btn btn-danger"><a href="{% url "student_view" %}" style="text-decoration:none; color:white;">Close</a></button>
+          <button type="submit" class="btn btn-success">Apply Changes</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+{% endblock dashboard_body %}
+

@@ -233,7 +233,7 @@ def student_add(request):
                 full_name=full_name,
                 age=age,
                 date_of_birth=date_of_birth,
-                class_acadenuc=class_academic,
+                class_academic=class_academic,
                 email=email,
                 phone_number=phone_number,
                 subjects_list=subjects_list
@@ -252,7 +252,50 @@ def student_add(request):
 @login_required(login_url='index')
 def student_view(request):
     students = Student.objects.all()
-    if not students:
-        messages.error(request,"No Students Added Yet!!")
-        return redirect("student_view")
+
+    for student in students:
+        subjects_list = eval(student.subjects_list)
+        total_marks = 0
+        for mark in subjects_list.values():
+            total_marks += int(mark)
+        student.average = total_marks/len(subjects_list)
+            
+    # if not students:
+    #     messages.error(request,"No Students Added Yet!!")
+    #     return redirect("student_view")
     return render(request, 'student/student_view.html', {"students":students})
+
+@login_required(login_url='index')
+def student_edit(request, id):
+    if request.method == 'POST':
+        full_name = request.POST['full_name']
+        age = request.POST['age']
+        date_of_birth = request.POST['date_of_birth']
+        class_academic = request.POST['class_academic']
+        phone_number = request.POST['phone_number']
+        
+        maths = request.POST['maths']
+        english = request.POST['english']
+        sst = request.POST['sst']
+
+        subjects_list = str({"maths":maths, "english":english, "sst":sst})
+
+        try:
+            student = Student.objects.get(id=id)
+            student.full_name = full_name
+            student.age = age
+            student.date_of_birth = date_of_birth
+            student.class_academic = class_academic
+            student.phone_number = phone_number
+            student.subjects_list = subjects_list
+            student.save()
+            messages.success(request, "Student Updated Successfully!")
+            return redirect('student_view')
+        except:
+            messages.error(request, "Something Wrong with Database!! Please Try Again Later")
+            return redirect('student_view')
+    
+    student = Student.objects.get(id=id)
+    subject_list = eval(student.subjects_list)
+    return render(request, 'student/student_edit.html',{'student':student, 'subject_list':subject_list})
+    
